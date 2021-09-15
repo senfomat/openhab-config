@@ -1,88 +1,10 @@
 // **** PRESENCE ****
 Group  eOther_Presence                          "Präsenz"         <selfinfo> (lIndoor) ["Sensor"]
 Number pOther_Presence_State                    "Präsenz"         <selfinfo> (eOther_Presence,gPersistance_History) ["Status"]
-Switch pOther_Presence_Holger_State             "Holger anwesend" <selfinfo> (eOther_Presence,gPersistance_History) ["Status","Presence"] { channel="mqtt:topic:mosquitto:device_ping:phone_hhees" }                                                       
-Switch pOther_Presence_Sandra_State             "Sandra anwesend" <selfinfo> (eOther_Presence,gPersistance_History) ["Status","Presence"] { channel="mqtt:topic:mosquitto:device_ping:phone_sandra" }
-
-// **** GARDEN DOOR ****
-Group  eOutdoor_Streedside_Gardendoor           "Gartentür"       <selfinfo> (lOutdoor_Streedside) ["Gate"]
-Contact pOutdoor_Streedside_Gardendoor_Bell_State                                                              (eOutdoor_Streedside_Gardendoor) ["Status"]                                                                                                  { channel="knx:device:bridge:other:switchBell" }
-DateTime pOutdoor_Streedside_Gardendoor_Bell_Last_Change "Klingel [%1$tH:%1$tM:%1$tS, %1$td.%1$tm]"    <selfbell> (eOutdoor_Streedside_Gardendoor) ["Point"]
-Switch   pOutdoor_Streedside_Gardendoor_Opener_Powered "Türöffner"                                 <selfdoor> (eOutdoor_Streedside_Gardendoor) ["Point"] { channel="knx:device:bridge:other:switchDooropener" }
-Switch   pOutdoor_Streedside_Gardendoor_Opener_Timer "Türoffner"                                 <selfdoor> (eOutdoor_Streedside_Gardendoor) ["Point"]
-
-//####### GF LIVINGROOM RECEIVER ########
-Group   eGF_Livingroom_Receiver                 "Receiver"        <selfinfo> (lGF_Livingroom) ["Sensor"]
-Contact pGF_Livingroom_Receiver_State                             <selfinfo> (eGF_Livingroom_Receiver) ["Point"] { channel="knx:device:bridge:other:receiverState" }
-
-//####### SMOKE DETECTOR ########
-Group   eOther_Smoke_Detector                   "Rauchmelder"     <selfinfo> (lIndoor) ["SmokeDetector"]
-Contact pOther_Smoke_Detector_State             "Rauchmelder [MAP(smoke_detector_de.map):%s]" <smoke> (eOther_Smoke_Detector) ["Smoke"] { channel="knx:device:bridge:other:smokeDetector" }
-
-//####### SMOKE DETECTOR ########
-Group   eOther_Alarm_Siren                      "Alarmsirene"     <selfalarm> (lIndoor) ["Siren"]
-Switch  pOther_Alarm_Siren_Powered              "Alarmsirene"     <selfalarm> (eOther_Alarm_System) ["Point"] { channel="knx:device:bridge:other:alarmSiren" }
-
-//####### HELPER SWITCH STATES ######
-Group  eFF_Bedroom_Switches_Long_Pressed        "Schalter"        <selfinfo> (lFF_Bedroom) ["WallSwitch"]
-Switch pFF_Bedroom_Switches_Long_Pressed_Left_State "Schlafz. Bett Fenster (lang)" (eFF_Bedroom_Switches_Long_Pressed) ["Switch"] { channel="knx:device:bridge:other:bedroomLeftLongPressed" }
-Switch pFF_Bedroom_Switches_Long_Pressed_Right_State "Schlafz. Bett Wand (lang)" (eFF_Bedroom_Switches_Long_Pressed) ["Switch"] { channel="knx:device:bridge:other:bedroomRightLongPressed" }
-
-//####### MANUAL STATE FLAGS #######
-Group  eOther_Manual_States                     "Aktive Features" <selfinfo> (lOther) ["Equipment"]
-Switch pOther_Manual_State_Notify               "Benachrichtigen" <selfshield> (eOther_Manual_States) ["Point"] { channel="knx:device:bridge:other:stateNotify" }
-Switch pOther_Manual_State_Holiday              "Urlaubsmodus"    <selfshield> (eOther_Manual_States) ["Point"] { channel="knx:device:bridge:other:stateHoliday" }
-Switch pOther_Manual_State_Air_Thoroughly_Notify"Lüftungshinweise"<selfshield> (eOther_Manual_States) ["Point"]
-Number pOther_Manual_State_Lightprogram         "Lichtprogram"    <selfautomode> (eOther_Manual_States) ["Point"]
-Number pOther_Manual_State_Auto_Attic_Light     "Mode [%d]"       <selfautomode> (eOther_Manual_States) ["Point"]
-Switch pOther_Manual_State_Auto_Christmas       "Weihnachtsmodus" <selfautomode> (eOther_Manual_States) ["Point"]
-Switch pOther_Manual_State_Auto_Lighting        "Beleuchtung Automatik" <selfautomode> (eOther_Manual_States) ["Point"]
-Switch pOther_Manual_State_Auto_Rollershutter   "Rollläden Automatik" <selfautomode> (eOther_Manual_States) ["Point"]
-Switch pOther_Manual_State_Auto_Sunprotection   "Beschattung Automatik" <selfautomode> (eOther_Manual_States) ["Point"]
-
-//####### AUTOMATIC STATE FLAGS #######
-Group  eOther_Automatic_States                  "Auto Features"   <selfinfo> (lOther) ["Equipment"]
-Switch pOther_Automatic_State_Solar             "Solar Aktiv"     <selfsun> (eOther_Automatic_States) ["Point"]
-Switch pOther_Automatic_State_Outdoorlights     "Aussenbeleuchtung Aktiv" <selflight> (eOther_Automatic_States) ["Point"]
-Number pOther_Automatic_State_Rollershutter     "Rollläden geschlossen [MAP(state_auto_rollershutter.map):%d]" <selfrollershutter> (eOther_Automatic_States) ["Point"]
-DateTime pOther_Automatic_State_Rollershutter_Up "Rollläden hoch [%1$tH:%1$tM]" <selfrollershutter> (eOther_Automatic_States) ["Point"]
-DateTime pOther_Automatic_State_Rollershutter_Down "Rollläden runter [%1$tH:%1$tM]" <selfrollershutter> (eOther_Automatic_States) ["Point"]
-Switch pOther_Automatic_State_Sunprotection_Attic "Rollladen Dachboden geschlossen" <selfrollershutter> (eOther_Automatic_States) ["Point"]
-Switch pOther_Automatic_State_Sunprotection_Bathroom "Rollladen Badezimmer geschlossen" <selfrollershutter> (eOther_Automatic_States) ["Point"]
-Switch pOther_Automatic_State_Sunprotection_Dressingroom "Rollladen Ankleide geschlossen" <selfrollershutter> (eOther_Automatic_States) ["Point"]
-Switch pOther_Automatic_State_Sunprotection_Bedroom "Rollladen Schlafzimmer geschlossen" <selfrollershutter> (eOther_Automatic_States) ["Point"]
-Switch pOther_Automatic_State_Sunprotection_Livingroom "Rollläden Wohnzimmer geschlossen" <selfrollershutter> (eOther_Automatic_States) ["Point"]
-Number pOther_Automatic_State_Sunprotection_Terrace "Terasse geschlossen [MAP(state_terrace.map):%d]" <selfrollershutter> (eOther_Automatic_States) ["Point"]
-
-//####### STATE MESSAGES #######
-Group  eOther_State_Messages                    "Nachrichten" <selfinfo> (lOther) ["Equipment"]
-String pOther_State_Message_Room                "Status [%s]" <selfinfo> (eOther_State_Messages) ["Point"] // room state
-String pOther_State_Message_Garden              "Status [%s]" <selfinfo> (eOther_State_Messages) ["Point"] // garden state
-String pOther_State_Message_Auto                "Status [%s]" <selfinfo> (eOther_State_Messages) ["Point"] // auto programs
- 
-String pOther_State_Message_Robot               "Status [%s]" <selfinfo> (eOther_State_Messages) ["Point"] // roomba and automower state
-String pOther_State_Message_Homeconnect         "Status [%s]" <selfinfo> (eOther_State_Messages) ["Point"] // homeconnect state
-String pOther_State_Message_Devices             "Status [%s]" <selfinfo> (eOther_State_Messages) ["Point"] // summerized device state
-
-String pOther_State_Message_Sensors             "Status [%s]" <selfinfo> (eOther_State_Messages) ["Point"] // sensors state
-String pOther_State_Message_Main                "Status [%s]" <selfinfo> (eOther_State_Messages) ["Point"] // main (utilityroom) state
-
-//####### SCENES #######
-Group  eOther_Scenes                            "Szenen" <selfinfo> (lOther) ["Equipment"]
-Switch pOther_Scene1                            "Scene 1" <selfautomode> (eOther_Scenes) ["Point"] { synonyms="Fernsehen" }
-Switch pOther_Scene2                            "Scene 2" <selfautomode> (eOther_Scenes) ["Point"] { synonyms="Aufstehen" }
-Switch pOther_Scene3                            "Scene 3" <selfautomode> (eOther_Scenes) ["Point"] { synonyms="Schlafen gehen" }
-Switch pOther_Scene4                            "Scene 4" <selfautomode> (eOther_Scenes) ["Point"] { synonyms="Gute Nacht", answer="Gute Nacht" }
-Switch pOther_Scene5                            "Scene 5" <selfautomode> (eOther_Scenes) ["Point"] { synonyms="Ich geh raus, Ich bin draussen" }
-Switch pOther_Scene6                            "Scene 6" <selfautomode> (eOther_Scenes) ["Point"] { synonyms="Fernseher einschalten" }
-Switch pOther_Scene7                            "Scene 7" <selfautomode> (eOther_Scenes) ["Point"]
-Switch pOther_Scene8                            "Scene 8" <selfautomode> (eOther_Scenes) ["Point"]
-Switch pOther_Scene9                            "Scene 9" <selfautomode> (eOther_Scenes) ["Point"]
+//Switch pOther_Presence_Holger_State             "Holger anwesend" <selfinfo> (eOther_Presence,gPersistance_History) ["Status","Presence"] { channel="mqtt:topic:mosquitto:device_ping:phone_hhees" }                                                       
+//Switch pOther_Presence_Sandra_State             "Sandra anwesend" <selfinfo> (eOther_Presence,gPersistance_History) ["Status","Presence"] { channel="mqtt:topic:mosquitto:device_ping:phone_sandra" }
 
 //####### SCENES #######
 Group  eOther_Helper                            "Helper" <selfinfo> (lOther) ["Equipment"]
 String Chart_From                               "Zeitraum" <selfcalendar> (eOther_Helper) ["Point"]
-String HabpanelViewer_Control_Cmd               "Habpanel Command" <selfautomode> (eOther_Helper) ["Point"]
-String VoiceCommand                             "Sprachbefehl [%s]" <recorder> (eOther_Helper) ["Point"]
-String VoiceMessage                             "Sprachnachricht [%s]" <recorder> (eOther_Helper) ["Point"]
 Number State_Server                             "Serverstatus [MAP(server_status.map):%s]" <selferror> (eOther_Helper) ["Point"]
